@@ -1,0 +1,297 @@
+/* 
+    Global reset
+    - Remove default margins/padding
+    - Use border-box for predictable sizing
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Full-screen center layout */
+body {
+    min-height: 100vh;
+    background: radial-gradient(circle at top, #1f2933, #020617);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f9fafb;
+}
+
+/* Light theme modifier (toggled via JS) */
+body.light-theme {
+    background: #e5edf8;
+}
+
+/* Container just centers the calculator */
+.container {
+    width: 100%;
+    max-width: 480px;
+    padding: 12px;
+}
+
+/* Main calculator card */
+.calculator {
+    background: #111827;
+    border-radius: 18px;
+    padding: 18px 16px 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Light theme styles for calculator card */
+body.light-theme .calculator {
+    background: #ffffff;
+    color: #020617;
+}
+
+/* Header (title + controls) */
+.calc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.calc-header h1 {
+    font-size: 1.1rem;
+    letter-spacing: 0.04em;
+}
+
+/* Control chips (angle mode & theme) */
+.calc-controls {
+    display: flex;
+    gap: 8px;
+}
+
+/* Reusable small pill-style button */
+.chip {
+    border: none;
+    outline: none;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.8);
+    color: #e5e7eb;
+    font-size: 0.75rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease, transform 0.1s ease;
+}
+
+body.light-theme .chip {
+    background: #e5edf8;
+    color: #111827;
+}
+
+.chip:hover {
+    background: rgba(15, 23, 42, 0.95);
+    transform: translateY(-1px);
+}
+
+.chip:active {
+    transform: translateY(0);
+}
+
+.chip-small {
+    padding-inline: 8px;
+    font-size: 0.7rem;
+}
+
+/* Display section */
+.display-section {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 8px;
+}
+
+/* Secondary expression display (small line on top) */
+.display-secondary {
+    min-height: 18px;
+    font-size: 0.75rem;
+    opacity: 0.7;
+    text-align: right;
+    word-wrap: break-word;
+}
+
+/* Main display input */
+#display-main {
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #020617;
+    color: #f9fafb;
+    font-size: 1.8rem;
+    text-align: right;
+    box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.15);
+}
+
+/* Light theme input */
+body.light-theme #display-main {
+    background: #f9fafb;
+    color: #020617;
+    box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.4);
+}
+
+/* Keypad grid layout */
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 8px;
+}
+
+/* Calculator button base styles */
+.btn {
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    padding: 10px 0;
+    background: #020617;
+    color: #e5e7eb;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow:
+        -4px -4px 8px rgba(148, 163, 184, 0.1),
+        5px 5px 10px rgba(0, 0, 0, 0.4);
+    transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s ease;
+}
+
+/* Wider button (for 0) spanning 2 columns */
+.btn-wide {
+    grid-column: span 2;
+}
+
+/* Operator/func/equal colors */
+.btn-operator,
+.btn-func {
+    color: #22d3ee;
+}
+
+.btn-equal {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #f9fafb;
+    font-weight: bold;
+}
+
+/* Light theme buttons */
+body.light-theme .btn {
+    background: #e5edf8;
+    color: #020617;
+    box-shadow:
+        -4px -4px 8px rgba(255, 255, 255, 0.8),
+        4px 4px 12px rgba(15, 23, 42, 0.35);
+}
+
+body.light-theme .btn-operator,
+body.light-theme .btn-func {
+    color: #0d9488;
+}
+
+body.light-theme .btn-equal {
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    color: #f9fafb;
+}
+
+/* Active/click feedback */
+.btn:active {
+    transform: translateY(1px) scale(0.97);
+    box-shadow: none;
+}
+
+/* This class is added temporarily via JS for key-press / click flash */
+.btn-flash {
+    transform: translateY(1px) scale(0.97);
+    box-shadow: none !important;
+}
+
+/* History section */
+.history {
+    margin-top: 12px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(148, 163, 184, 0.25);
+    max-height: 170px;
+    overflow-y: auto;
+    font-size: 0.8rem;
+}
+
+/* History header row */
+.history-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    opacity: 0.9;
+}
+
+/* History list */
+#history-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+/* Individual history item */
+#history-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 3px 4px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.12s ease, transform 0.08s ease;
+}
+
+#history-list li:hover {
+    background: rgba(148, 163, 184, 0.12);
+    transform: translateY(-1px);
+}
+
+#history-list li span.expr {
+    opacity: 0.7;
+}
+
+#history-list li span.res {
+    font-weight: bold;
+}
+
+/* Display shake animation for errors */
+.display-error {
+    animation: calc-shake 0.18s linear;
+}
+
+@keyframes calc-shake {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-2px);
+    }
+    50% {
+        transform: translateX(2px);
+    }
+    75% {
+        transform: translateX(-2px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Small scrollbar tweak for WebKit browsers */
+.history::-webkit-scrollbar {
+    width: 6px;
+}
+.history::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.5);
+    border-radius: 999px;
+}

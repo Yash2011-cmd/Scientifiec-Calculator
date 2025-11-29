@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advanced Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="calculator">
+            <!-- Header with title and quick controls -->
+            <header class="calc-header">
+                <h1>Scientific Calculator</h1>
+
+                <div class="calc-controls">
+                    <!-- Angle mode toggle: Deg / Rad -->
+                    <button id="angle-toggle" class="chip">DEG</button>
+
+                    <!-- Theme toggle: Dark / Light -->
+                    <button id="theme-toggle" class="chip">🌙</button>
+                </div>
+            </header>
+
+            <!-- Display section -->
+            <section class="display-section">
+                <!-- 
+                    Secondary display: shows the raw expression being built 
+                    (e.g., sin(30)+3^2)
+                -->
+                <div class="display-secondary" id="display-expression"></div>
+
+                <!-- Main display for final value / active input -->
+                <input
+                    id="display-main"
+                    type="text"
+                    inputmode="decimal"
+                    autocomplete="off"
+                    aria-label="Calculator display"
+                    readonly
+                />
+            </section>
+
+            <!-- Keypad: all buttons, no inline onClick attributes -->
+            <section class="keypad" id="keypad">
+                <!-- Row 1 -->
+                <button class="btn btn-operator" data-action="clear">AC</button>
+                <button class="btn btn-operator" data-action="delete">DEL</button>
+                <button class="btn btn-operator" data-action="percent">%</button>
+                <button class="btn btn-operator" data-value="(">(</button>
+                <button class="btn btn-operator" data-value=")">)</button>
+
+                <!-- Row 2: trig & power -->
+                <button class="btn btn-func" data-func="sin">sin</button>
+                <button class="btn btn-func" data-func="cos">cos</button>
+                <button class="btn btn-func" data-func="tan">tan</button>
+                <button class="btn btn-operator" data-value="^">^</button>
+                <button class="btn btn-operator" data-value="/">÷</button>
+
+                <!-- Row 3: roots & logs -->
+                <button class="btn btn-func" data-func="sqrt">√</button>
+                <button class="btn btn-func" data-func="square">x²</button>
+                <button class="btn btn-func" data-func="log">log</button>
+                <button class="btn btn-func" data-func="ln">ln</button>
+                <button class="btn btn-operator" data-value="*">×</button>
+
+                <!-- Row 4 -->
+                <button class="btn" data-value="7">7</button>
+                <button class="btn" data-value="8">8</button>
+                <button class="btn" data-value="9">9</button>
+                <button class="btn btn-func" data-func="ans">Ans</button>
+                <button class="btn btn-operator" data-value="-">−</button>
+
+                <!-- Row 5 -->
+                <button class="btn" data-value="4">4</button>
+                <button class="btn" data-value="5">5</button>
+                <button class="btn" data-value="6">6</button>
+                <button class="btn btn-func" data-func="pi">π</button>
+                <button class="btn btn-operator" data-value="+">+</button>
+
+                <!-- Row 6 -->
+                <button class="btn" data-value="1">1</button>
+                <button class="btn" data-value="2">2</button>
+                <button class="btn" data-value="3">3</button>
+                <button class="btn btn-func" data-func="e">e</button>
+                <button class="btn btn-equal" data-action="equals">=</button>
+
+                <!-- Row 7 -->
+                <button class="btn btn-wide" data-value="0">0</button>
+                <button class="btn" data-action="double-zero">00</button>
+                <button class="btn" data-action="dot">.</button>
+            </section>
+
+            <!-- History panel (rendered from JS) -->
+            <section class="history" id="history">
+                <div class="history-header">
+                    <span>History</span>
+                    <button id="clear-history" class="chip chip-small">Clear</button>
+                </div>
+                <ul id="history-list"></ul>
+            </section>
+        </div>
+    </div>
+
+    <!-- Main script -->
+    <script src="script.js"></script>
+</body>
+</html>
